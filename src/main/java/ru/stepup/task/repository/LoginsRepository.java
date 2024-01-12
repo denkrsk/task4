@@ -1,0 +1,7 @@
+package ru.stepup.task.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import ru.stepup.task.model.Logins;
+
+public interface LoginsRepository extends JpaRepository<Logins, Long> {
+}

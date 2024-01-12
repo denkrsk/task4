@@ -3,6 +3,7 @@ package ru.stepup.task.loadfile;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
+import ru.stepup.task.service.ProcessService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +23,7 @@ public class LoadFile {
 
         for (File fl : lst) {
             String ss = fl.getCanonicalPath();
-            System.out.println(ss.substring(ss.lastIndexOf('\\', ss.lastIndexOf('\\')-1)+1));
+//            System.out.println(ss.substring(ss.lastIndexOf('\\', ss.lastIndexOf('\\')-1)+1));
             System.out.println(getFileContent(ss.substring(ss.lastIndexOf('\\', ss.lastIndexOf('\\')-1)+1)));
         }
     }
@@ -38,7 +39,6 @@ public class LoadFile {
 
             BufferedReader br = null;
             try {
-//              System.out.println(resource.get);
                 br = new BufferedReader(
                         new InputStreamReader(resource.getInputStream(), "UTF-8"));
                 String line;
