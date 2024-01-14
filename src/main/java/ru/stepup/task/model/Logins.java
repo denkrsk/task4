@@ -2,7 +2,7 @@ package ru.stepup.task.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import ru.stepup.task.repository.LoginsRepository;
 
 import java.sql.Timestamp;
 
@@ -16,7 +16,7 @@ public class Logins {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @CreationTimestamp
+
     @Column(name="access_date")
     private Timestamp accessDate;
 
@@ -27,4 +27,22 @@ public class Logins {
 
     @Column(name="application")
     private String application;
+
+    public void setApplication(String application) {
+        switch (application) {
+            case "WEB":
+                application = "web";
+                break;
+
+            case "mobile":
+                application = "mobile";
+                break;
+
+            default:
+                application = "other";
+                break;
+        }
+        this.application = application;
+    }
 }
+

@@ -1,0 +1,27 @@
+2024-01-14 at 14:49:45 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files
+2024-01-14 at 14:50:22 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files2024-01-14 at 14:52:00 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files
+2024-01-14 at 14:53:55 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+2024-01-14 at 14:58:34 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+[Petr1 Петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван Иванович 2023-01-14-09:07:32.111 mobile]
+2024-01-14 at 18:09:27 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван иванович 2023-01-14-09:07:32.111 mobile]
+2024-01-14 at 18:10:04 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван иванович 2023-01-14-09:07:32.111 mobile]
+2024-01-14 at 18:29:37 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван иванович 2023-01-14-09:07:32.111 mobe]

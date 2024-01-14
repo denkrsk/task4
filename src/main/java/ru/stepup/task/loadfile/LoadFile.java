@@ -3,19 +3,22 @@ package ru.stepup.task.loadfile;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
+import ru.stepup.task.log.LogTransformation;
 import ru.stepup.task.service.ProcessService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-public class LoadFile {
+public class LoadFile{
+    private static List<String> fileStr =  new ArrayList<>();
 
-    public static void getFileName(String filePath) throws IOException {
+    public static List<String> getFileName(String filePath) throws IOException {
+
 
         File dir = new File(filePath);
         File[] arrFiles = dir.listFiles();
@@ -23,11 +26,11 @@ public class LoadFile {
 
         for (File fl : lst) {
             String ss = fl.getCanonicalPath();
-//            System.out.println(ss.substring(ss.lastIndexOf('\\', ss.lastIndexOf('\\')-1)+1));
-            System.out.println(getFileContent(ss.substring(ss.lastIndexOf('\\', ss.lastIndexOf('\\')-1)+1)));
+            getFileContent(ss.substring(ss.lastIndexOf('\\', ss.lastIndexOf('\\')-1)+1));
         }
+        return fileStr;
     }
-    public static String getFileContent(String filePath) throws IOException {
+    public static void getFileContent(String filePath) throws IOException {
 
         ApplicationContext appContext =
                 new ClassPathXmlApplicationContext(new String[]{});
@@ -35,15 +38,13 @@ public class LoadFile {
 
             Resource resource = appContext.getResource(filePath);
 
-            StringBuilder sb = new StringBuilder();
-
             BufferedReader br = null;
             try {
                 br = new BufferedReader(
                         new InputStreamReader(resource.getInputStream(), "UTF-8"));
                 String line;
                 while ((line = br.readLine()) != null) {
-                    sb.append(line);
+                   fileStr.add(line);
                 }
             } finally {
                 if (br != null) try {
@@ -52,6 +53,6 @@ public class LoadFile {
                     e.printStackTrace();
                 }
             }
-        return sb.toString();
+
     }
 }
