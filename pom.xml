@@ -65,7 +65,21 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>3.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
+    <build>
+        <testSourceDirectory>src/test/</testSourceDirectory>
+    </build>
 
 </project>

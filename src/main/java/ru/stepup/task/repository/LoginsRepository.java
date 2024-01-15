@@ -3,7 +3,6 @@ package ru.stepup.task.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.stepup.task.log.LogTransformation;
 import ru.stepup.task.model.Logins;
-import ru.stepup.task.service.Getable;
 
 public interface LoginsRepository extends JpaRepository<Logins, Long> {
     @Override

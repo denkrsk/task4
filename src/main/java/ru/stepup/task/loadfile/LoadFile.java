@@ -3,21 +3,21 @@ package ru.stepup.task.loadfile;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
-import ru.stepup.task.log.LogTransformation;
-import ru.stepup.task.service.ProcessService;
+import ru.stepup.task.model.Logins;
+import ru.stepup.task.model.Users;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class LoadFile{
-    private static List<String> fileStr =  new ArrayList<>();
+    private static HashMap<Logins, Users> fileStr =  new HashMap<>();
 
-    public static List<String> getFileName(String filePath) throws IOException {
+    public static HashMap<Logins, Users> getFileName(String filePath) throws IOException {
 
 
         File dir = new File(filePath);
@@ -44,7 +44,24 @@ public class LoadFile{
                         new InputStreamReader(resource.getInputStream(), "UTF-8"));
                 String line;
                 while ((line = br.readLine()) != null) {
-                   fileStr.add(line);
+                    String[] arrLst = line.split(" ");
+                    Users usr = new Users();
+                    Logins lgns = new Logins();
+                    for (int i=0; i < arrLst.length; i++) {
+                        switch (i) {
+                            case 0: usr.setUsername(arrLst[i]);
+                                break;
+                            case 1: usr.setFio(arrLst[1] + " " + arrLst[2] + " " + arrLst[3]);
+                                break;
+                            case 4: lgns.setAccessDate(getTmStmp(arrLst[i]));
+                                break;
+                            case 5: lgns.setApplication(arrLst[i].toUpperCase());
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                   fileStr.put(lgns, usr);
                 }
             } finally {
                 if (br != null) try {
@@ -54,5 +71,17 @@ public class LoadFile{
                 }
             }
 
+    }
+
+    public static Timestamp getTmStmp(String str) {
+        System.out.println("str = " + str);
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss.SSS");
+            Date parsedDate = dateFormat.parse(str);
+            return new Timestamp(parsedDate.getTime());
+        } catch (Exception e) { //this generic but you can control another types of exception
+            // look the origin of excption
+            return null;
+        }
     }
 }

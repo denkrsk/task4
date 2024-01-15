@@ -1,5 +1,6 @@
 package ru.stepup.task.service;
 
+import ru.stepup.task.loadfile.ReadFl;
 import ru.stepup.task.model.Logins;
 import ru.stepup.task.model.Users;
 import ru.stepup.task.repository.LoginsRepository;
@@ -7,13 +8,14 @@ import ru.stepup.task.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.stepup.task.utils.Getable;
+import ru.stepup.task.utils.UtilsRep;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.Instant;
+import java.util.*;
 
 
 @Service
@@ -26,58 +28,31 @@ public class ProcessService {
 
     public void start(String dirStr) throws IOException {
         Getable readFl = UtilsRep.cashe(new ReadFl());
-        List<String> arrData = readFl.getFileName(dirStr);
-        for (String lst:arrData) {
-            String[] arrLst = lst.split(" ");
-            Users usr = new Users();
-            Logins lgns = new Logins();
-            for (int i=0; i < arrLst.length; i++) {
-//                System.out.println(arrLst[i]);
-                switch (i) {
-                    case 0: usr.setUsername(arrLst[i]);
-                        break;
-                    case 1: usr.setFio(arrLst[1] + " " + arrLst[2] + " " + arrLst[3]);
-                        break;
-                    case 4: lgns.setAccessDate(getTmStmp(arrLst[i]));
-                        break;
-                    case 5: lgns.setApplication(arrLst[i].toUpperCase());
-                        break;
-                    default:
-                        break;
-                }
-            }
+        HashMap<Logins, Users> dataFl = readFl.getFileName(dirStr);
+
+        Iterator<Map.Entry<Logins, Users>> itr = dataFl.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry<Logins, Users> entry = itr.next();
+//            Pair pair = entry.getValue();
             System.out.println("Save");
-            Optional<Users> user = usersRepository.findByUsername(usr.getUsername());
+            Optional<Users> user = usersRepository.findByUsername(entry.getValue().getUsername());
             Users currentUser = user.orElseGet(() -> {
                 System.out.println("Create new user");
                 return usersRepository.save(Users.builder()
-                .fio(usr.getFio())
-                        .username(usr.getUsername()).build());}
+                        .fio(entry.getValue().getFio())
+                        .username(entry.getValue().getUsername()).build());}
             );
 
-            lgns.setUser(currentUser);
-            loginsRepository.save(lgns);
+            entry.getKey().setUser(currentUser);
+            loginsRepository.save(entry.getKey());
 
             System.out.println("currentUser id="+currentUser.getId());
 
             System.out.println(currentUser.getLogins());
+
         }
 
-
-
-
-
     }
-    public Timestamp getTmStmp (String str) {
-        System.out.println("str = " + str);
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss.SSS");
-            Date parsedDate = dateFormat.parse(str);
-            return new Timestamp(parsedDate.getTime());
-        } catch (Exception e) { //this generic but you can control another types of exception
-            // look the origin of excption
-            return null;
-        }
-    }
+
 
 }

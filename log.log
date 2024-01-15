@@ -25,3 +25,19 @@ OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, 
 java.lang.reflect.Method getFileName
 IN: C:/work/Java/task4/src/main/resources/files 
 OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван иванович 2023-01-14-09:07:32.111 mobe]
+2024-01-15 at 10:17:18 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван иванович 2023-01-14-09:07:32.111 mobe]
+2024-01-15 at 10:17:59 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: [Petr1 петров Петр Петрович 2024-01-14-09:07:32.111 web, Ivan Ивано Иван иванович 2023-01-14-09:07:32.111 mobe]
+2024-01-15 at 13:19:13 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: {Logins(Id=null, accessDate=2024-01-14 09:07:32.111, application=web)=Users(Id=null, username=Petr1, fio=Петров Петр Петрович, logins=null), Logins(Id=null, accessDate=2023-01-14 09:07:32.111, application=other)=Users(Id=null, username=Ivan, fio=Ивано Иван Иванович, logins=null)}
+2024-01-15 at 13:20:00 MSK
+java.lang.reflect.Method getFileName
+IN: C:/work/Java/task4/src/main/resources/files 
+OUT: {Logins(Id=null, accessDate=2024-01-14 09:07:32.111, application=web)=Users(Id=null, username=Petr, fio=Петров Петр Петрович, logins=null), Logins(Id=null, accessDate=2023-01-14 09:07:32.111, application=other)=Users(Id=null, username=Ivan, fio=Ивано Иван Иванович, logins=null)}

@@ -1,11 +1,12 @@
-package ru.stepup.task.service;
+package ru.stepup.task.utils;
 
 import ru.stepup.task.model.Logins;
+import ru.stepup.task.model.Users;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public interface Getable {
-    List<String> getFileName(String filePath) throws IOException;
+    HashMap<Logins, Users>  getFileName(String filePath) throws IOException;
 }
